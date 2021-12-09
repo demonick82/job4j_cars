@@ -18,7 +18,7 @@ public class Post {
     private int productionYear;
     private String desc;
 
-    //@Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime created;
     private boolean isSale;
 
