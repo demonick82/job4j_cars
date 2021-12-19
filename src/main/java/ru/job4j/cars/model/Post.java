@@ -1,14 +1,13 @@
 package ru.job4j.cars.model;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringJoiner;
+import java.util.*;
 
 @Entity
-@Table(name = "posts ")
+@Table(name = "posts")
 public class Post {
 
     @Id
@@ -16,24 +15,25 @@ public class Post {
     private int id;
     private String name;
     private int productionYear;
-    private String desc;
+    private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime created;
+    @UpdateTimestamp
+    private Date created;
+
     private boolean isSale;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "model_id")
     private Model model;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "carBoby_id")
     private CarBoby carBoby;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -42,7 +42,7 @@ public class Post {
         Post post = new Post();
         post.name = name;
         post.productionYear = productionYear;
-        post.desc = desc;
+        post.description = desc;
         post.isSale = isSale;
         post.model = model;
         post.carBoby = body;
@@ -78,19 +78,19 @@ public class Post {
         this.productionYear = productionYear;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public LocalDateTime getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
@@ -157,7 +157,7 @@ public class Post {
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("productionYear=" + productionYear)
-                .add("desc='" + desc + "'")
+                .add("desc='" + description + "'")
                 .add("created=" + created)
                 .add("isSale=" + isSale)
                 .add("model=" + model)

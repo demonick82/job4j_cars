@@ -13,10 +13,13 @@ public class Photo {
     private int id;
     private String name;
     private String path;
+    private boolean exists;
 
-    public static Photo of(String name) {
+    public static Photo of(String name, String path, boolean exists) {
         Photo photo = new Photo();
         photo.name = name;
+        photo.path = path;
+        photo.exists = exists;
         return photo;
     }
 
@@ -44,6 +47,14 @@ public class Photo {
         this.path = path;
     }
 
+    public boolean isExists() {
+        return exists;
+    }
+
+    public void setExists(boolean exists) {
+        this.exists = exists;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -67,6 +78,7 @@ public class Photo {
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("path='" + path + "'")
+                .add("exists=" + exists)
                 .toString();
     }
 }

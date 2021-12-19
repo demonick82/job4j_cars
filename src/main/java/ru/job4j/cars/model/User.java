@@ -14,12 +14,14 @@ public class User {
     private String name;
     private String email;
     private String phone;
+    private String password;
 
-    public static User of(String name, String email, String phone) {
+    public static User of(String name, String email, String phone, String password) {
         User user = new User();
         user.name = name;
         user.email = email;
         user.phone = phone;
+        user.password = password;
         return user;
     }
 
@@ -55,6 +57,14 @@ public class User {
         this.phone = phone;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -79,6 +89,7 @@ public class User {
                 .add("name='" + name + "'")
                 .add("email='" + email + "'")
                 .add("phone='" + phone + "'")
+                .add("password='" + password + "'")
                 .toString();
     }
 }

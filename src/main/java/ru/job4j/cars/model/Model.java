@@ -13,7 +13,7 @@ public class Model {
     private int id;
     private String name;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
