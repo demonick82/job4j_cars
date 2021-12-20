@@ -18,7 +18,7 @@ public class Post {
     private String description;
 
     @UpdateTimestamp
-    private Date created;
+    private LocalDateTime created;
 
     private boolean isSale;
 
@@ -86,11 +86,11 @@ public class Post {
         this.description = description;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
