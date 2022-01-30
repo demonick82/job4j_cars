@@ -15,47 +15,47 @@
 + Maven, Tomcat
 + HTML, JavaScript, jQuery, JSON
 
-###Главная страница
+### Главная страница
 На главной странице собраны все активные объявления, а также меню поиска по 
 определенным параметрам
  
-![ScreenShot](images\main.jpeg "index.html")
+![ScreenShot](images/main.jpeg "index.html")
 
 Для зарегистрированных пользователей становятся доступными дополнительные меню: 
 создать объявление и мои объявления. которые позволяют создавать, редактировать 
 и удалять объявления, а так же добавлять фото.
 
-![ScreenShot](images\mainUser.jpg "index.html")
+![ScreenShot](images/mainUser.jpg "index.html")
 
-###Страница подробной информации о машине
+### Страница подробной информации о машине
 Здесь можно подробнее изучить параметры автомобиля, а также увидеть контакты продавца
 
-![ScreenShot](images\post.jpeg "index.html")
+![ScreenShot](images/post.jpeg "index.html")
 
-###Страница со всеми объявлениями пользователя
+### Страница со всеми объявлениями пользователя
 Здесь можно добавлять фото, редактировать объявление и удалять его 
 
-![ScreenShot](images\myPosts.jpg "index.html")
+![ScreenShot](images/myPosts.jpg "index.html")
 
-###Страница создания нового объявления
+### Страница создания нового объявления
 
 Здесь можно создавать новое объявление
-![ScreenShot](images\createPost.jpg "index.html")
+![ScreenShot](images/createPost.jpg "index.html")
 
-###Страница редактирования
+### Страница редактирования
 Здесь можно редактировать объявление, а также менять его 
 статус продано или нет
 
-![ScreenShot](images\editPost.jpg "index.html")
+![ScreenShot](images/editPost.jpg "index.html")
 
-###Страница авторизации
+### Страница авторизации
 
-![ScreenShot](images\login.jpg "index.html")
+![ScreenShot](images/login.jpg "index.html")
 
 
-###Страница регистрации
+### Страница регистрации
 
-![ScreenShot](images\auth.jpg "index.html")
+![ScreenShot](images/auth.jpg "index.html")
 
 
 
