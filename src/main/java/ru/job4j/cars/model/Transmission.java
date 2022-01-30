@@ -5,23 +5,18 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 @Entity
-@Table(name = "models")
-public class Model {
+@Table(name = "transmissions")
+public class Transmission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "brand_id")
-    private Brand brand;
-
-    public static Model of(String name, Brand brand) {
-        Model model = new Model();
-        model.name = name;
-        model.brand = brand;
-        return model;
+    public static Transmission of(String name) {
+        Transmission transmission = new Transmission();
+        transmission.name = name;
+        return transmission;
     }
 
     public int getId() {
@@ -40,14 +35,6 @@ public class Model {
         this.name = name;
     }
 
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -56,8 +43,9 @@ public class Model {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Model model = (Model) o;
-        return id == model.id;
+
+        Transmission that = (Transmission) o;
+        return id == that.id;
     }
 
     @Override
@@ -67,10 +55,9 @@ public class Model {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Model.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", Transmission.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("name='" + name + "'")
-                .add("brand=" + brand)
                 .toString();
     }
 }
