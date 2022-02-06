@@ -1,7 +1,7 @@
 package ru.job4j.cars.servlet;
 
 import ru.job4j.cars.model.User;
-import ru.job4j.cars.store.HBmStore;
+import ru.job4j.cars.repository.PostRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ public class MyPostsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
-            req.setAttribute("posts", HBmStore.instOf().findPostsForUser(user.getEmail()));
+            req.setAttribute("posts", PostRepository.instOf().findPostsForUser(user.getEmail()));
             req.getRequestDispatcher("myPosts.jsp").forward(req, resp);
     }
 }

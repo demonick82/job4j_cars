@@ -1,6 +1,6 @@
 package ru.job4j.cars.servlet;
 
-import ru.job4j.cars.store.HBmStore;
+import ru.job4j.cars.repository.PostRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +17,7 @@ public class DownloadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
-        File downloadFile = new File(HBmStore.instOf().findPostById(Integer.parseInt(id)).getPhotos().get(0).getPath());
+        File downloadFile = new File(PostRepository.instOf().findPostById(Integer.parseInt(id)).getPhotos().get(0).getPath());
         resp.setContentType("application/octet-stream");
         resp.setHeader("Content-Disposition", "attachment; filename=\"" + downloadFile.getName() + "\"");
         try (FileInputStream stream = new FileInputStream(downloadFile)) {

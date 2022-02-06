@@ -2,7 +2,7 @@ package ru.job4j.cars.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.job4j.cars.store.HBmStore;
+import ru.job4j.cars.repository.ModelRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +22,7 @@ public class LoadModelServlet extends HttpServlet {
         resp.setContentType("application/json; charset=utf-8");
         String brand = (req.getParameter("brand"));
         OutputStream output = resp.getOutputStream();
-        String json = GSON.toJson(HBmStore.instOf().findModelsByMark(brand));
+        String json = GSON.toJson(ModelRepository.instOf().findModelsByMark(brand));
         output.write(json.getBytes(StandardCharsets.UTF_8));
         output.flush();
         output.close();

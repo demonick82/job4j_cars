@@ -2,7 +2,7 @@ package ru.job4j.cars.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.job4j.cars.store.HBmStore;
+import ru.job4j.cars.repository.CarBodyRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +21,7 @@ public class LoadCarBodyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json; charset=utf-8");
         OutputStream output = resp.getOutputStream();
-        String json = GSON.toJson(HBmStore.instOf().findAllCarBodies());
+        String json = GSON.toJson(CarBodyRepository.instOf().findAllCarBodies());
         output.write(json.getBytes(StandardCharsets.UTF_8));
         output.flush();
         output.close();

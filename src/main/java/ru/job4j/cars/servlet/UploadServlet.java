@@ -6,10 +6,10 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import ru.job4j.cars.model.Photo;
 import ru.job4j.cars.model.Post;
-import ru.job4j.cars.store.HBmStore;
+import ru.job4j.cars.repository.PhotoRepository;
+import ru.job4j.cars.repository.PostRepository;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +31,7 @@ public class UploadServlet extends HttpServlet {
         factory.setRepository(repository);
         ServletFileUpload upload = new ServletFileUpload(factory);
         Photo photo = null;
-        Post post = HBmStore.instOf().findPostById(id);
+        Post post = PostRepository.instOf().findPostById(id);
         try {
             List<FileItem> items = upload.parseRequest(req);
             String path = "C:/imagesCar" + File.separator + req.getParameter("id");
@@ -50,8 +50,8 @@ public class UploadServlet extends HttpServlet {
                     }
                 }
             }
-            HBmStore.instOf().deleteAllNotExistPhotos(post);
-            HBmStore.instOf().addPhoto(post, photo);
+            PhotoRepository.instOf().deleteAllNotExistPhotos(post);
+            PhotoRepository.instOf().addPhoto(post, photo);
         } catch (FileUploadException e) {
             e.printStackTrace();
         }

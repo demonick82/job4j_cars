@@ -1,7 +1,6 @@
 package ru.job4j.cars.servlet;
 
-import ru.job4j.cars.store.HBmStore;
-import ru.job4j.cars.store.Store;
+import ru.job4j.cars.repository.PostRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,8 +14,7 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        Store store = HBmStore.instOf();
-        req.setAttribute("posts", store.findAllPosts());
+        req.setAttribute("posts", PostRepository.instOf().findAllPosts());
         req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 

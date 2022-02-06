@@ -1,8 +1,10 @@
 package ru.job4j.cars.servlet;
 
 import ru.job4j.cars.model.*;
-import ru.job4j.cars.store.HBmStore;
-import ru.job4j.cars.store.Store;
+import ru.job4j.cars.repository.CarBodyRepository;
+import ru.job4j.cars.repository.ModelRepository;
+import ru.job4j.cars.repository.PostRepository;
+import ru.job4j.cars.repository.TransmissionRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,6 @@ public class CreatePostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         req.setCharacterEncoding("UTF-8");
-        Store store = new HBmStore();
 
         int markId = Integer.parseInt(req.getParameter("mark"));
         int modelId = Integer.parseInt(req.getParameter("model"));
@@ -35,14 +36,14 @@ public class CreatePostServlet extends HttpServlet {
         String desc = req.getParameter("desc");
         String driveUnit = req.getParameter("driveUnit");
 
-        Model model = store.findModelForId(markId, modelId);
-        Transmission transmission = store.findTransmissionForId(transmissionId);
-        CarBoby carBoby = store.findCarBodyForId(carBodyId);
+        Model model = ModelRepository.instOf().findModelForId(markId, modelId);
+        Transmission transmission = TransmissionRepository.instOf().findTransmissionForId(transmissionId);
+        CarBoby carBoby = CarBodyRepository.instOf().findCarBodyForId(carBodyId);
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         Post post = Post.of(price, year, mileage, color, driveUnit, desc, false, model, carBoby, transmission, user);
         Photo photo = Photo.of("noPhoto", "C:/imagesCar/no_photo.jpg", false);
-        store.addPost(post, photo);
+        PostRepository.instOf().addPost(post, photo);
         resp.sendRedirect(req.getContextPath() + "/index");
     }
 }

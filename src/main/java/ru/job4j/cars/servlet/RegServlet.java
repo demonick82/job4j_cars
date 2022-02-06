@@ -1,7 +1,7 @@
 package ru.job4j.cars.servlet;
 
 import ru.job4j.cars.model.User;
-import ru.job4j.cars.store.HBmStore;
+import ru.job4j.cars.repository.UserRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,10 +20,10 @@ public class RegServlet extends HttpServlet {
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
 
-        User tmpUser = HBmStore.instOf().findUserByEmail(email);
+        User tmpUser = UserRepository.instOf().findUserByEmail(email);
         if (tmpUser == null) {
             User user = User.of(name, email, phone, password);
-            HBmStore.instOf().saveUser(user);
+            UserRepository.instOf().saveUser(user);
             HttpSession sc = req.getSession();
             sc.setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/index");

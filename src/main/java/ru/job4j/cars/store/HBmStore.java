@@ -12,22 +12,21 @@ import ru.job4j.cars.model.*;
 import java.util.Collection;
 import java.util.function.Function;
 
-public class HBmStore implements Store, AutoCloseable {
+public class HBmStore implements AutoCloseable {
     private final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
     private final SessionFactory sf = new MetadataSources(registry)
             .buildMetadata().buildSessionFactory();
 
     private static final class Lazy {
-        private static final Store INST = new HBmStore();
+        private static final HBmStore INST = new HBmStore();
     }
 
-    public static Store instOf() {
+    public static HBmStore instOf() {
         return Lazy.INST;
     }
 
-    @Override
-    public void addPost(Post post, Photo photo) {
+  /*  public void addPost(Post post, Photo photo) {
         this.tx(session -> {
             post.addPhoto(photo);
             session.save(post);
@@ -35,7 +34,6 @@ public class HBmStore implements Store, AutoCloseable {
         });
     }
 
-    @Override
     public Collection<Post> findAllPosts() {
         return this.tx(session -> session.createQuery(
                 "select distinct p from Post p  "
@@ -43,7 +41,6 @@ public class HBmStore implements Store, AutoCloseable {
                 .list());
     }
 
-    @Override
     public Post findPostById(int id) {
         return this.tx(
                 session -> {
@@ -55,7 +52,6 @@ public class HBmStore implements Store, AutoCloseable {
         );
     }
 
-    @Override
     public User findUserByEmail(String email) {
         return this.tx(
                 session -> {
@@ -66,7 +62,6 @@ public class HBmStore implements Store, AutoCloseable {
         );
     }
 
-    @Override
     public Collection<Post> findPostsForUser(String email) {
         return this.tx(session -> session.createQuery(
                 "select distinct p from Post p  "
@@ -76,12 +71,10 @@ public class HBmStore implements Store, AutoCloseable {
                 .list());
     }
 
-    @Override
     public Collection<Brand> findAllBrands() {
         return this.tx(session -> session.createQuery("from Brand").list());
     }
 
-    @Override
     public Collection<Model> findModelsByMark(String brand) {
         return this.tx(session -> session.createQuery("select distinct m from Model m "
                 + "join fetch m.brand b  where b.name =:brand ")
@@ -89,17 +82,14 @@ public class HBmStore implements Store, AutoCloseable {
                 .list());
     }
 
-    @Override
     public Collection<Transmission> findAllTransmissions() {
         return this.tx(session -> session.createQuery("from Transmission ").list());
     }
 
-    @Override
     public Collection<CarBoby> findAllCarBodies() {
         return this.tx(session -> session.createQuery("from CarBoby ").list());
     }
 
-    @Override
     public Brand findBrandForId(int id) {
         return this.tx(
                 session -> {
@@ -110,7 +100,6 @@ public class HBmStore implements Store, AutoCloseable {
         );
     }
 
-    @Override
     public Model findModelForId(int brandId, int modelId) {
         return this.tx(
                 session -> {
@@ -123,7 +112,6 @@ public class HBmStore implements Store, AutoCloseable {
         );
     }
 
-    @Override
     public Transmission findTransmissionForId(int id) {
         return this.tx(
                 session -> {
@@ -134,7 +122,6 @@ public class HBmStore implements Store, AutoCloseable {
         );
     }
 
-    @Override
     public CarBoby findCarBodyForId(int id) {
         return this.tx(
                 session -> {
@@ -145,7 +132,6 @@ public class HBmStore implements Store, AutoCloseable {
         );
     }
 
-    @Override
     public void deletePost(Post post) {
         this.tx(session -> {
             session.remove(post);
@@ -153,8 +139,6 @@ public class HBmStore implements Store, AutoCloseable {
         });
     }
 
-
-    @Override
     public void addPhoto(Post post, Photo photo) {
         this.tx(session -> {
             post.addPhoto(photo);
@@ -163,16 +147,13 @@ public class HBmStore implements Store, AutoCloseable {
         });
     }
 
-    @Override
     public void deleteAllNotExistPhotos(Post post) {
         this.tx(session -> {
             post.getPhotos().removeIf(photo -> !photo.isExists());
             return true;
         });
-
     }
 
-    @Override
     public void updatePost(Post post) {
         this.tx(session -> {
             session.update(post);
@@ -180,7 +161,6 @@ public class HBmStore implements Store, AutoCloseable {
         });
     }
 
-    @Override
     public Collection<Post> findPosts(int markId, long startPrice, long endPrice, int startYear,
                                       int endYear, int carBodyId, int transmissionId, String driveUnit, Boolean exist) {
         return this.tx(session -> session.createQuery(
@@ -208,12 +188,10 @@ public class HBmStore implements Store, AutoCloseable {
                 .list());
     }
 
-    @Override
     public void saveUser(User user) {
         this.tx(session -> session.save(user));
     }
 
-    @Override
     public void saveModel(Model model) {
         this.tx(session -> session.save(model));
 
@@ -224,20 +202,17 @@ public class HBmStore implements Store, AutoCloseable {
 
     }
 
-    @Override
     public void saveCarBodies(CarBoby carBoby) {
         this.tx(session -> session.save(carBoby));
 
     }
 
-    @Override
     public void saveTransmissions(Transmission transmission) {
         this.tx(session -> session.save(transmission));
+    }*/
 
-    }
 
-
-    private <T> T tx(final Function<Session, T> command) {
+    public <T> T tx(final Function<Session, T> command) {
         final Session session = sf.openSession();
         final Transaction tx = session.beginTransaction();
         try {

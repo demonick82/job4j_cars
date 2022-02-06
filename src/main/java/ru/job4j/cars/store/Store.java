@@ -3,7 +3,6 @@ package ru.job4j.cars.store;
 import ru.job4j.cars.model.*;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface Store {
 

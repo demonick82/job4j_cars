@@ -1,7 +1,6 @@
 package ru.job4j.cars.servlet;
 
-import ru.job4j.cars.store.HBmStore;
-import ru.job4j.cars.store.Store;
+import ru.job4j.cars.repository.PostRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +15,7 @@ public class PostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String postId = req.getParameter("id");
-        req.setAttribute("post", HBmStore.instOf().findPostById(Integer.parseInt(postId)));
+        req.setAttribute("post", PostRepository.instOf().findPostById(Integer.parseInt(postId)));
         req.getRequestDispatcher("post.jsp").forward(req, resp);
     }
 }

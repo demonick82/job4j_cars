@@ -1,7 +1,7 @@
 package ru.job4j.cars.servlet;
 
 import ru.job4j.cars.model.Post;
-import ru.job4j.cars.store.HBmStore;
+import ru.job4j.cars.repository.PostRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +19,8 @@ public class DeletePostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-        Post post = HBmStore.instOf().findPostById(id);
-        HBmStore.instOf().deletePost(post);
+        Post post = PostRepository.instOf().findPostById(id);
+        PostRepository.instOf().deletePost(post);
         deletePath(id);
         req.getRequestDispatcher("myPosts").forward(req, resp);
     }
